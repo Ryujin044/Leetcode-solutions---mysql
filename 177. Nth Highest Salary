@@ -1,0 +1,14 @@
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+  -- OFFSET is 0-indexed, so the Nth highest is at offset N-1.
+  -- We must set this before the query because OFFSET doesn't accept formulas.
+  SET N = N - 1; 
+  
+  RETURN (
+      -- Write your MySQL query statement below.
+      SELECT DISTINCT salary
+      FROM Employee
+      ORDER BY salary DESC
+      LIMIT 1 OFFSET N
+  );
+END
